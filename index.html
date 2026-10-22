@@ -6,45 +6,6 @@
   <meta name="theme-color" content="#f4f9ff">
   <title>Vũ Phạm Tuấn Kiệt — Góc nhỏ của tôi</title>
   <style>
-    
-    .hero-art {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
-
-.profile-photo-wrap {
-  width: 240px;
-  aspect-ratio: 4 / 5;
-  padding: 7px;
-  border-radius: 25px;
-  background: linear-gradient(135deg, #1769e8, #4ac9ed);
-  box-shadow: 0 15px 35px #1769e833;
-}
-
-.profile-photo {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 19px;
-  background: #e8f2ff;
-}
-
-.photo-upload-label {
-  padding: 10px 15px;
-  border-radius: 12px;
-  background: #1769e8;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.photo-upload-label:hover {
-  background: #124cb0;
-}
-
     :root {
       --blue: #1769e8;
       --blue-dark: #124cb0;
@@ -120,6 +81,11 @@
     .btn-primary:hover { background: var(--blue-dark); }
     .btn-secondary { background: white; color: var(--blue); border: 1px solid var(--line); }
     .hero-art { position: relative; min-height: 265px; display: grid; place-items: center; }
+    .profile-photo-wrap { position: relative; z-index: 1; width: min(245px, 100%); aspect-ratio: 4 / 5; padding: 8px; border-radius: 32px; background: linear-gradient(145deg, var(--blue), var(--cyan)); box-shadow: 0 20px 45px #1e65b32b; transform: rotate(2deg); }
+    .profile-photo { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 25px; background: linear-gradient(145deg, #d6edff, #fff); }
+    .photo-upload-label { display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top: 14px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 12px; background: white; color: var(--blue); font-weight: 800; cursor: pointer; }
+    .photo-upload-label:hover { background: var(--blue-soft); }
+    .photo-help { margin: 8px 0 0; color: var(--muted); font-size: .82rem; text-align: center; }
     .orbit { position: absolute; width: 255px; height: 255px; border: 1px dashed #a8cdfa; border-radius: 50%; animation: rotate 28s linear infinite; }
     .orbit::before, .orbit::after { content: ""; position: absolute; border-radius: 50%; width: 14px; height: 14px; background: var(--cyan); box-shadow: 0 0 0 7px #4ac9ed25; }
     .orbit::before { top: 20px; left: 43px; } .orbit::after { right: 14px; bottom: 65px; background: var(--blue); }
@@ -140,8 +106,12 @@
     .card p { margin-bottom: 0; color: var(--muted); }
     .icon-box { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 15px; color: var(--blue); background: var(--blue-soft); font-size: 1.35rem; }
     .profile-layout { display: grid; grid-template-columns: .78fr 1.22fr; gap: 20px; }
-    .profile-panel { background: linear-gradient(145deg, #1769e8, #41bfe9); color: white; border-radius: var(--radius); padding: 28px; min-height: 100%; }
+    .profile-panel { background: linear-gradient(145deg, #1769e8, #41bfe9); color: white; border-radius: var(--radius); padding: 28px; min-width: 0; }
     .profile-panel .avatar-symbol { background: white; color: var(--blue); box-shadow: none; margin-bottom: 20px; }
+    .about-photo-wrap { width: min(210px, 100%); aspect-ratio: 4 / 5; padding: 6px; margin-bottom: 20px; border-radius: 24px; background: linear-gradient(145deg, #fff, #a9eaff); box-shadow: 0 14px 30px #083e9a35; overflow: hidden; }
+    .about-photo { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 19px; background: #e8f2ff; }
+    .about-photo-upload { display: inline-flex; margin: 0 0 18px; padding: 9px 12px; border: 1px solid #ffffff80; border-radius: 11px; background: #ffffff20; color: white; font-weight: 800; cursor: pointer; }
+    .about-photo-upload:hover { background: #ffffff35; }
     .profile-panel p { color: #eaf5ff; }
     .info-list { display: grid; gap: 0; }
     .info-row { display: flex; gap: 15px; padding: 14px 0; border-bottom: 1px solid var(--line); }
@@ -204,6 +174,7 @@
       .hero { padding: 26px 22px; border-radius: 24px; gap: 10px; }
       h1 { font-size: clamp(2.5rem, 13vw, 3.5rem); }
       .hero-art { min-height: 250px; }
+      .profile-photo-wrap { width: min(220px, 85%); }
       .orbit { width: 220px; height: 220px; }
       .avatar-card { width: 165px; height: 185px; }
       .avatar-symbol { width: 88px; height: 88px; font-size: 2.1rem; }
@@ -242,32 +213,24 @@
 
     <main>
       <section class="page active" id="home" aria-labelledby="home-title">
-        
-<div class="hero-art">
-  <div class="profile-photo-wrap">
-    <img
-      id="homeProfilePhoto"
-      class="profile-photo"
-      src="assets/avatar.jpg"
-      alt="Ảnh cá nhân của tôi"
-    >
-  </div>
-
-  <label class="photo-upload-label" for="homePhotoInput">
-    ＋ Thêm / đổi ảnh của tôi
-  </label>
-
-  <input
-    type="file"
-    id="homePhotoInput"
-    accept="image/*"
-    hidden
-  >
-</div>
-
-          <div class="hero-art" aria-label="Hình minh họa chữ TK">
+        <div class="hero">
+          <div class="hero-copy">
+            <span class="eyebrow">Chào mừng đến với thế giới của tôi</span>
+            <h1 id="home-title">Xin chào,<br>mình là <span class="gradient-text full-name">Vũ Phạm Tuấn Kiệt.</span></h1>
+            <p class="lead">Một người thẳng thắn, luôn tò mò và thích khám phá những điều mới. Đây là góc nhỏ để mình chia sẻ sở thích, kỹ năng và những mục tiêu đang theo đuổi.</p>
+            <div class="actions">
+              <button class="btn btn-primary" data-go="about">Khám phá về mình <span aria-hidden="true">→</span></button>
+              <button class="btn btn-secondary" data-go="gallery">Xem thư viện ✦</button>
+            </div>
+          </div>
+          <div class="hero-art" aria-label="Ảnh đại diện của mình">
             <div class="orbit"></div>
-            <div class="avatar-card"><div class="avatar-symbol">TK</div><div class="avatar-caption">Keep creating ✦</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;z-index:1;width:100%">
+              <div class="profile-photo-wrap"><img class="profile-photo" id="homeProfilePhoto" alt="Ảnh cá nhân của mình" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23d6edff'/%3E%3Cstop offset='1' stop-color='%23ffffff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='500' rx='32' fill='url(%23g)'/%3E%3Ccircle cx='200' cy='170' r='65' fill='%234ac9ed'/%3E%3Cpath d='M75 430c10-95 62-145 125-145s115 50 125 145' fill='%231769e8'/%3E%3Ctext x='200' y='475' text-anchor='middle' font-family='Arial' font-size='22' font-weight='700' fill='%23124cb0'%3EẢNH CỦA BẠN%3C/text%3E%3C/svg%3E"></div>
+              <label class="photo-upload-label" for="homePhotoInput">＋ Thêm / đổi ảnh của tôi</label>
+              <input type="file" id="homePhotoInput" accept="image/*" hidden>
+              <p class="photo-help">Chọn ảnh từ máy tính để xem thử.</p>
+            </div>
             <div class="mini-note note-one">✦ Stay curious</div><div class="mini-note note-two">⌘ Code · Draw · Play</div>
           </div>
         </div>
@@ -281,7 +244,7 @@
       <section class="page" id="about" aria-labelledby="about-title">
         <div class="section-head"><span class="eyebrow">Một chút về mình</span><h2 id="about-title">Đằng sau cái tên Kiệt</h2><p>Mình thích tìm hiểu cách mọi thứ vận hành, thử những điều mới và phát triển khả năng của bản thân qua từng ngày.</p></div>
         <div class="profile-layout">
-          <aside class="profile-panel"><div class="avatar-symbol">TK</div><h3>Vũ Phạm Tuấn Kiệt</h3><p>Thẳng thắn · Tò mò · Thích sáng tạo</p><div class="tag-list"><span class="tag" style="background:#ffffff28;color:white">Lập trình</span><span class="tag" style="background:#ffffff28;color:white">Vẽ</span><span class="tag" style="background:#ffffff28;color:white">Game</span></div></aside>
+          <aside class="profile-panel"><div class="about-photo-wrap"><img class="about-photo" id="aboutProfilePhoto" alt="Ảnh của tôi trong phần Về tôi" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23d6edff'/%3E%3Cstop offset='1' stop-color='%23ffffff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='500' rx='32' fill='url(%23g)'/%3E%3Ccircle cx='200' cy='170' r='65' fill='%234ac9ed'/%3E%3Cpath d='M75 430c10-95 62-145 125-145s115 50 125 145' fill='%231769e8'/%3E%3Ctext x='200' y='475' text-anchor='middle' font-family='Arial' font-size='22' font-weight='700' fill='%23124cb0'%3EẢNH CỦA BẠN%3C/text%3E%3C/svg%3E"></div><label class="about-photo-upload" for="aboutPhotoInput">＋ Thêm / đổi ảnh</label><input type="file" id="aboutPhotoInput" accept="image/*" hidden><h3>Vũ Phạm Tuấn Kiệt</h3><p>Thẳng thắn · Tò mò · Thích sáng tạo</p><div class="tag-list"><span class="tag" style="background:#ffffff28;color:white">Lập trình</span><span class="tag" style="background:#ffffff28;color:white">Vẽ</span><span class="tag" style="background:#ffffff28;color:white">Game</span></div></aside>
           <div class="card"><h3>Thông tin của mình</h3><div class="info-list">
             <div class="info-row"><div class="info-label">Họ và tên</div><div class="info-value">Vũ Phạm Tuấn Kiệt</div></div>
             <div class="info-row"><div class="info-label">Ngày sinh</div><div class="info-value">20/11/2010</div></div>
@@ -359,20 +322,6 @@
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh phóng to"><button class="lightbox-close" id="lightboxClose" aria-label="Đóng">×</button><img id="lightboxImage" alt="Ảnh phóng to"></div>
   </div>
   <script>
-const photoInput = document.getElementById("homePhotoInput");
-const profilePhoto = document.getElementById("homeProfilePhoto");
-
-photoInput.addEventListener("change", function () {
-  const file = this.files[0];
-
-  if (!file || !file.type.startsWith("image/")) {
-    return;
-  }
-
-  const imageUrl = URL.createObjectURL(file);
-  profilePhoto.src = imageUrl;
-});
-
     (() => {
       const nav = document.getElementById('mainNav');
       const menuToggle = document.getElementById('menuToggle');
@@ -380,6 +329,30 @@ photoInput.addEventListener("change", function () {
       const navButtons = [...document.querySelectorAll('.nav-btn')];
       const toast = document.getElementById('toast');
       let toastTimer;
+      const homePhotoInput = document.getElementById('homePhotoInput');
+      const homeProfilePhoto = document.getElementById('homeProfilePhoto');
+      let homePhotoUrl = null;
+      const aboutPhotoInput = document.getElementById('aboutPhotoInput');
+      const aboutProfilePhoto = document.getElementById('aboutProfilePhoto');
+      let aboutPhotoUrl = null;
+      aboutPhotoInput.addEventListener('change', () => {
+        const file = aboutPhotoInput.files && aboutPhotoInput.files[0];
+        if (!file || !file.type.startsWith('image/')) return;
+        if (aboutPhotoUrl) URL.revokeObjectURL(aboutPhotoUrl);
+        aboutPhotoUrl = URL.createObjectURL(file);
+        aboutProfilePhoto.src = aboutPhotoUrl;
+        showToast('Đã hiển thị ảnh trong phần Về tôi.');
+        aboutPhotoInput.value = '';
+      });
+      homePhotoInput.addEventListener('change', () => {
+        const file = homePhotoInput.files && homePhotoInput.files[0];
+        if (!file || !file.type.startsWith('image/')) return;
+        if (homePhotoUrl) URL.revokeObjectURL(homePhotoUrl);
+        homePhotoUrl = URL.createObjectURL(file);
+        homeProfilePhoto.src = homePhotoUrl;
+        showToast('Đã hiển thị ảnh của bạn trên trang chủ.');
+        homePhotoInput.value = '';
+      });
 
       function showToast(message) {
         toast.textContent = message;
@@ -485,6 +458,8 @@ photoInput.addEventListener("change", function () {
       });
       window.addEventListener('beforeunload', () => {
         imageUrls.forEach(url => URL.revokeObjectURL(url));
+        if (homePhotoUrl) URL.revokeObjectURL(homePhotoUrl);
+        if (aboutPhotoUrl) URL.revokeObjectURL(aboutPhotoUrl);
         if (audioUrl) URL.revokeObjectURL(audioUrl);
       });
       showPage('home');
